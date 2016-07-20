@@ -11,5 +11,8 @@ module InteractCart
    def self.product_class
     @@product_class.constantize
    end
+   def self.layout
+    @@layout.constantize
+   end
 end
 
