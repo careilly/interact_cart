@@ -9,9 +9,9 @@ Gem::Specification.new do |s|
   s.version     = InteractCart::VERSION
   s.authors     = ["Colman Reilly"]
   s.email       = ["careilly@mac.com"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of InteractCart."
-  s.description = "TODO: Description of InteractCart."
+  s.homepage    = "http://www.interactpublications.com"
+  s.summary     = "Summary of InteractCart."
+  s.description = "Description of InteractCart."
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
