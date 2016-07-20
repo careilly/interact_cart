@@ -1,6 +1,3 @@
 class Order < ApplicationRecord
-  belongs_to :cart , :class_name => "InteractCart::Cart"
-  def orderid
-    id
-  end
+  acts_as_order_for_interact_cart
 end
