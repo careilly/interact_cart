@@ -1,0 +1,16 @@
+%li.ic_cart_item.row
+  %span.ic_label.small-4.columns 
+    =item.product.label
+  %span.ic_price.small-2.columns 
+    &euro;#{"%2.2f" % item.price}
+  %span.ic_quantity.small-1.columns
+    =item.quantity
+  %span.ic_subtotal.small-2.columns
+    &euro;#{"%2.2f" % (item.price*item.quantity)}
+  %span.ic_controls.small-3.columns
+    =link_to interact_cart.cart_update_path(item.id,change: -1) do
+      %span.ic_minus
+    =link_to interact_cart.cart_update_path(item.id,change: 1) do 
+      %span.ic_plus
+    =link_to interact_cart.cart_remove_path(item.id) do
+      %span.ic_remove

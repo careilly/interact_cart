@@ -1,0 +1,17 @@
+.ic_cart_display
+  %ul.ic_cart
+    %li.ic_cart_item.row
+      %span.ic_header.small-4.columns 
+        %b Product
+      %span.ic_header.small-2.columns 
+        %b Price
+      %span.ic_header.small-1.columns
+        %b Quan
+      %span.ic_header.small-2.columns
+        %b Subtotal
+      %span.small-3.columns
+    -cart.cart_items.each do |i|
+      =ic_display_cart_item i
+  .row
+    .small-12.columns
+      %a.button.ic_cart_checkout_buttton(href="#{interact_cart.checkout_path}") Checkout

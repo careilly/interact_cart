@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  orderid: MyString
+  cart: one
+  email: MyString
+  status: MyString
+  stripe_token: MyString
+
+two:
+  orderid: MyString
+  cart: two
+  email: MyString
+  status: MyString
+  stripe_token: MyString

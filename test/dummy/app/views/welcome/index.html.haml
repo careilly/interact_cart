@@ -1,0 +1,15 @@
+.row
+  .medium-8.columns
+    %ul
+      -Product.all.each do |p|
+        %li
+          %p
+            =p.label
+          %p
+            =p.price
+          %p
+            =ic_add_to_cart p.id,p.price
+  .medium-4.columns
+    =ic_display_cart
+
+=ic_display_cart_summary

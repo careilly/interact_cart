@@ -1,0 +1,36 @@
+@import "foundation"
+@import "foundation-icons"
+
+.ic_cart_display
+  ul.ic_cart
+    list-style: none
+    margin: 0
+    .ic_header
+      font-size: 10px
+    .ic_cart_item
+      &:nth-of-type(even) 
+        background-color: lightgrey !important
+      .ic_label
+      .ic_quantity
+      .ic_price
+      .ic_subtotal
+      .ic_minus:before,.ic_plus:before,.ic_remove:before
+        font-family: "foundation-icons"
+        font-style: normal
+        font-weight: normal
+        font-variant: normal
+        text-transform: none
+        line-height: 1
+        -webkit-font-smoothing: antialiased
+        display: inline-block
+        text-decoration: inherit
+      .ic_minus
+        &:before 
+          content: "\f176" 
+      .ic_plus
+        &:before 
+          content: "\f199"
+      .ic_remove
+        &:before 
+          content: "\f217"
+  button.ic_cart_checkout_button

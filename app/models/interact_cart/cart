@@ -1,0 +1,33 @@
+class Cart < ApplicationRecord
+  has_many :cart_items
+  ProductClass=Product
+
+  def add_item(pid)
+    p=ProductClass.find(pid)
+    item = cart_items.where("product_id = ?",pid).first
+    if item
+        item.quantity=item.quantity + 1
+        item.save
+    else
+        cart_items.create!(product: p,quantity: 1)
+    end
+    save
+  end
+  def total
+    total=0
+    cart_items.all.each do |i|
+      total+=i.subtotal
+    end
+    total
+  end
+  def delete_item(item)
+    cart_items.delete(CartItem.find(item))
+  end
+  def update_item_quantity(item,n)
+    ci=CartItem.find(item)
+    if n>0 || (ci.quantity>1) 
+      ci.quantity=ci.quantity+n
+    end
+    ci.save
+  end
+end
