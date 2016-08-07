@@ -7,6 +7,9 @@ module InteractCart
   #
    mattr_accessor :product_class
    mattr_accessor :layout
+   mattr_accessor :order_params
+   mattr_accessor :order_receiver_email
+   mattr_accessor :order_subject
 
    def self.product_class
     @@product_class.constantize

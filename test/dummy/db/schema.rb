@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160720133027) do
+ActiveRecord::Schema.define(version: 20160726110256) do
 
   create_table "interact_cart_cart_items", force: :cascade do |t|
     t.integer  "cart_id"
@@ -37,6 +37,9 @@ ActiveRecord::Schema.define(version: 20160720133027) do
     t.string   "stripe_token"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.string   "name"
+    t.string   "address"
+    t.string   "phone"
     t.index ["cart_id"], name: "index_orders_on_cart_id"
   end
 

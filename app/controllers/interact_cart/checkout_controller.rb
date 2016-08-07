@@ -14,7 +14,11 @@ module InteractCart
     def complete_checkout
       token = params[:stripeToken]
       begin
-        order=Order.new(email: params[:stripeEmail],cart: @ic_cart)
+        order=Order.new()
+        order.cart=@ic_cart
+        InteractCart.order_params.each do |p|
+          order[p]=params[p]
+        end
         order.save
         charge = Stripe::Charge.create(
           :amount      => (@ic_cart.total*100).to_i,
@@ -27,6 +31,7 @@ module InteractCart
         order.status="Paid"
         order.stripe_token=token
         order.save
+        order.order_completed
       rescue Stripe::CardError => e
         @ic_cart_checkout_message="Card declined. Please check your details or contact your issuing bank."
       end

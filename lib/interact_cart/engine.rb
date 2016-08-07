@@ -2,6 +2,7 @@ require 'haml-rails'
 require 'stripe'
 require 'foundation-rails'
 require 'foundation-icons-sass-rails'
+require 'jquery-rails'
 
 module InteractCart
   class Engine < ::Rails::Engine

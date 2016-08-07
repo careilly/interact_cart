@@ -1,16 +1,72 @@
+
 =ic_display_cart
 
-= form_tag complete_checkout_path do 
+= form_tag complete_checkout_path,id: "payment_form" do 
   %article
     -if flash[:error].present?
       #error_explanation
         %p 
           flash[:error] 
+    =render partial: "order_form"
+
     %label.amount
       %span 
         Amount: 
         =@ic_cart.total
-        
-        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="#{Rails.configuration.stripe[:publishable_key]}" data-description="Order" data-amount="#{(@ic_cart.total*100).to_i}" data-locale="auto"></script>
+    %span.payment-errors
+    .form-row
+      %label
+        %span Card Number
+        %input{"data-stripe" => "number", :size => "20", :type => "text"}/
+    .form-row
+      %label
+        %span Expiration (MM/YY)
+        %input{"data-stripe" => "exp_month", :size => "2", :type => "text"}/
+      %span /
+      %input{"data-stripe" => "exp_year", :size => "2", :type => "text"}/
+    .form-row
+      %label
+        %span CVC
+        %input{"data-stripe" => "cvc", :size => "4", :type => "text"}/
+    %input.submit{:type => "submit", :value => "Submit Payment"}/
         
 
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+
+:javascript
+  $(function() {
+    Stripe.setPublishableKey("#{Rails.configuration.stripe[:publishable_key]}")
+    var $form = $('#payment_form');
+    $form.submit(function(event) {
+      // Disable the submit button to prevent repeated clicks:
+      $form.find('.submit').prop('disabled', true);
+
+      // Request a token from Stripe:
+      Stripe.card.createToken($form, stripeResponseHandler);
+
+      // Prevent the form from being submitted:
+      return false;
+    });
+  });
+  function stripeResponseHandler(status, response) {
+  // Grab the form:
+    var $form = $('#payment_form');
+
+    if (response.error) { // Problem!
+
+      // Show the errors on the form:
+      $form.find('.payment-errors').text(response.error.message);
+      $form.find('.submit').prop('disabled', false); // Re-enable submission
+
+    } else { // Token was created!
+
+      // Get the token ID:
+      var token = response.id;
+
+      // Insert the token ID into the form so it gets submitted to the server:
+      $form.append($('<input type="hidden" name="stripeToken">').val(token));
+
+      // Submit the form:
+      $form.get(0).submit();
+    }
+  };
