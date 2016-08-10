@@ -3,11 +3,6 @@ require_dependency "interact_cart/application_controller"
 module InteractCart
   class CheckoutController < ApplicationController
     def checkout
-      Rails.configuration.stripe = {
-        :publishable_key => "pk_test_TVaJyBmDPx3dDaqwqAJTqCBD",
-        :secret_key      => "sk_test_yz9DZKVfwqHQnIeOGOmL6bL0"
-      }
-
       Stripe.api_key = Rails.configuration.stripe[:secret_key]
     end
 
